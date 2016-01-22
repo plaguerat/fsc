@@ -5,8 +5,12 @@
  * @param  [str] $string String to decorate
  * @param  [str|int] $decor  Pattern used for decoration
  * @return [str]         Teh decorated string
+ *
+ * some typical decorations
+ * 1 = bold
+ * 4 = underlined
  */
 function decorateString($string, $decor)
 {
     return sprintf("\e[%sm%s\e[0m", $decor, $string);
-};
+}
