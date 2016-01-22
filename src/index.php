@@ -1,5 +1,5 @@
 <?php
-require_once("phar://fsc/help.php");
+require_once("phar://fsc.phar/help.php");
 // Simple function to colorize output easier
 $colorize = function ($string, $color) {
     return sprintf("\033[%sm%s\033[0m", $color, $string);
