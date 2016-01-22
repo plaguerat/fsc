@@ -1,0 +1,5 @@
+import keyMirror from "keymirror";
+
+module.exports = keyMirror({
+    [_upper_]_LOAD: null
+})

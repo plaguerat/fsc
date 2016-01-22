@@ -1,0 +1,13 @@
+import AppDispatcher from "../dispatcher/AppDispatcher";
+import Constants     from "../constants/[_capitalize_]Constants";
+
+const actions = {
+    load: (data)=>{
+         AppDispatcher.dispatch({
+            type:Constants.[_upper_]_LOAD
+            [_lower_]s: data
+        })
+    }
+}
+
+module.exports = actions;

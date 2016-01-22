@@ -1,0 +1,31 @@
+import _                from "lodash";
+import { EventEmitter } from "events";
+import AppDispatcher    from "../dispatcher/AppDispatcher";
+import assign           from "object-assign";
+import Constants        from "../constants/[_capitalize_]Constants";
+
+const CHANGE_EVENT = "change";
+const _[_lower_]      = {};
+const store        = assign({}, EventEmitter.prototype, {
+
+    addChangeListener: (cb)=>store.on(CHANGE_EVENT, cb),
+
+    all: ()=>_[_type_],
+
+    emitChange: ()=>store.emit(CHANGE_EVENT),
+
+    load: (data)=>_.map(data, (d)=>_[_lower_][d.id] = d),
+
+    removeChangeListener: (cb)=>store.removeListener(CHANGE_EVENT, cb),
+
+    dispatcherIndex: AppDispatcher.register( (action)=>{
+        switch (action.type) {
+        case Constants.[_upper_]_LOAD:
+            store.load(action.[_lower_]);
+            store.emitChange();
+            break;
+        }
+    } )
+})
+
+module.exports = store;

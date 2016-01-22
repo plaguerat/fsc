@@ -1,0 +1,19 @@
+import { ajax } from "jquery";
+import Actions  from "../actions/[_capitalize_]Actions";
+
+const API_URL = "/api/1/[_lower_]s";
+const api = {
+    all: ()=>api.getAll(),
+
+    getAll: function() {
+        ajax({
+            method: "GET",
+            success: (data)=>{
+                Actions.load();
+            },
+            url: API_URL
+        })
+    }
+}
+
+module.exports = api;
