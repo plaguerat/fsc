@@ -20,13 +20,14 @@ $phar = new \Phar(
     "fsc.phar"
 );
 $phar->setStub($phar->createDefaultStub("index.php"));
-$phar["index.php"]               = file_get_contents($srcRoot . "index.php");
-$phar["templates/actions.txt"]   = file_get_contents($srcRoot . "templates/actions.txt");
-$phar["templates/api.txt"]       = file_get_contents($srcRoot . "templates/api.txt");
-$phar["templates/constants.txt"] = file_get_contents($srcRoot . "templates/constants.txt");
-$phar["templates/stores.txt"]    = file_get_contents($srcRoot . "templates/stores.txt");
-$phar["help.php"]                = file_get_contents($srcRoot . "help.php");
-$phar["helpers/colorize.php"]    = file_get_contents($srcRoot . "helpers/colorize.php");
-$phar["helpers/decorateString.php"]    = file_get_contents($srcRoot . "helpers/decorateString.php");
+$phar["index.php"]                  = file_get_contents($srcRoot . "index.php");
+$phar["templates/actions.txt"]      = file_get_contents($srcRoot . "templates/actions.txt");
+$phar["templates/api.txt"]          = file_get_contents($srcRoot . "templates/api.txt");
+$phar["templates/constants.txt"]    = file_get_contents($srcRoot . "templates/constants.txt");
+$phar["templates/stores.txt"]       = file_get_contents($srcRoot . "templates/stores.txt");
+$phar["help.php"]                   = file_get_contents($srcRoot . "help.php");
+$phar["helpers/colorize.php"]       = file_get_contents($srcRoot . "helpers/colorize.php");
+$phar["helpers/decorateString.php"] = file_get_contents($srcRoot . "helpers/decorateString.php");
+$phar["helpers/twrite.php"]         = file_get_contents($srcRoot . "helpers/twrite.php");
 // $phar->buildFromDirectory($srcRoot . "templates");
 fwrite(STDOUT, "All done, enjoy");

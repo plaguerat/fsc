@@ -2,8 +2,9 @@
 require_once("phar://fsc.phar/help.php");
 require_once("phar://fsc.phar/helpers/colorize.php");
 require_once("phar://fsc.phar/helpers/decorateString.php");
+require_once("phar://fsc.phar/helpers/twrite.php");
 
-fwrite(STDOUT, "One moment\r\n\r\n");
+twrite("Create a new flux store -\r\n\r\n");
 sleep(1);
 
 $shortOpts = "h";
@@ -13,6 +14,7 @@ $longOpts = [ "store:", "storepath:" ];
 
 // Get the arguments/options from input
 $opts = getopt($shortOpts, $longOpts);
+
 if (isset($opts["h"])) {
     displayHelp();
     exit();
@@ -20,13 +22,13 @@ if (isset($opts["h"])) {
 
 // Without a store name, there is no need to proceed
 if (! isset($opts["storepath"])) {
-    fwrite(STDOUT, colorize(strtoupper("no storepath entered, aborting!!! \r\n\r\n\r\n"), 31));
+    twrite(colorize(strtoupper("no storepath entered, aborting!!! \r\n\r\n\r\n"), 31));
     exit(1);
 }
 
 // If the store isn't set, we can't really do anything
 if (! isset($opts["store"])) {
-    fwrite(STDOUT, colorize(strtoupper("no store entered, aborting!!! \r\n\r\n\r\n"), 31));
+    twrite(colorize(strtoupper("no store entered, aborting!!! \r\n\r\n\r\n"), 31));
     exit(1);
 }
 
@@ -37,7 +39,7 @@ $storePath = preg_replace("~/$~", "", $opts["storepath"]);
 // @TODO This might be overcome by checking if it is relative and prepending the
 // directory to it
 if (preg_match("~^\.~", $storePath)) {
-    fwrite(STDOUT, colorize("Please use absolute paths\r\n\r\n", 34));
+    twrite(colorize("Please use absolute paths\r\n\r\n", 34));
     exit;
 }
 $storeName = $opts["store"];
@@ -46,8 +48,8 @@ $storeName = $opts["store"];
 // This will change if relative paths are allowed
 
 // We have, at a minimun, the stores directory
-fwrite(STDOUT, colorize("Time to create some new flux architecture\r\n\r\n", 4));
-fwrite(STDOUT, "Store name: " . colorize($storeName, 34) . "\r\n");
+twrite(colorize("Time to create some new flux architecture\r\n\r\n", 4));
+twrite("Store name: " . colorize($storeName, 34) . "\r\n");
 
 // Begin creating things :-)
 $lowerReplace = "[__type__]";
@@ -90,29 +92,29 @@ foreach ($files as $key => $value) {
         );
         $create = trim(fgets(STDIN));
         if (strcasecmp("Y", $create) === 0) {
-            fwrite(STDOUT, colorize("Attempting to create directory\r\n", 32));
+            twrite(colorize("Attempting to create directory\r\n", 32));
             if (! @mkdir($dirPath)) {
-                fwrite(STDOUT, colorize("Could not create Directory, skipping\r\n", 37));
+                twrite(colorize("Could not create Directory, skipping\r\n", 37));
                 sleep(2);
                 continue;
             }
-            fwrite(STDOUT, colorize("Directory successfully created", 32));
+            twrite(colorize("Directory successfully created", 32));
         } else {
-            fwrite(STDOUT, colorize("Skipping!", 35));
+            twrite(colorize("Skipping!", 35));
             continue;
         }
     }
     $filepath = sprintf("%s/%s/%s%s.jsx", $storePath, $key, $storeName, $value);
-    fwrite(STDOUT, "\r\n\r\nChecking " . $filepath . "\r\n");
+    twrite("\r\n\r\nChecking " . $filepath . "\r\n");
     if (file_exists($filepath)) {
-        fwrite(STDOUT, "\t" . colorize(colorize(strtoupper("file exists, overwrite(Y/N): "), "1"), 34));
+        twrite("\t" . colorize(colorize(strtoupper("file exists, overwrite(Y/N): "), "1"), 34));
         $overwrite = trim(fgets(STDIN));
         if (strcasecmp($overwrite, "y") !== 0) {
-            fwrite(STDOUT, colorize("Skipping " . $filepath . "\r\n", 32));
+            twrite(colorize("Skipping " . $filepath . "\r\n", 32));
             continue;
         }
     }
-    fwrite(STDOUT, colorize("\t ... Creating " . $filepath . "\r\n", 36));
+    twrite(colorize("\t ... Creating " . $filepath . "\r\n", 36));
     $template = $parseString($key . ".txt");
     file_put_contents($filepath, $template);
 }
