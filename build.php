@@ -5,7 +5,7 @@ $srcRoot   = __DIR__ . "/src/";
 $buildRoot = __DIR__ . "/build/";
 
 $phar = new \Phar(
-    $buildRoot . "flux-store-create.phar",
+    $buildRoot . "fsc.phar",
     \FilesystemIterator::CURRENT_AS_FILEINFO | \FilesystemIterator::KEY_AS_FILENAME,
     "flux-store-create.phar"
 );

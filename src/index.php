@@ -1,5 +1,5 @@
 <?php
-require_once("phar://flux-store-create.phar/help.php");
+require_once("phar://fsc/help.php");
 // Simple function to colorize output easier
 $colorize = function ($string, $color) {
     return sprintf("\033[%sm%s\033[0m", $color, $string);
@@ -69,7 +69,7 @@ $parseString = function ($template) use ($searches) {
     return str_ireplace(
         array_keys($searches),
         array_values($searches),
-        file_get_contents("phar://flux-store-create.phar/templates/" . $template)
+        file_get_contents("phar://fsc/templates/" . $template)
     );
 };
 
