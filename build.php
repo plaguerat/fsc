@@ -1,6 +1,16 @@
 #!/usr/bin/env php
 <?php
 fwrite(STDOUT, "Building the phar archive\r\n");
+
+fwrite(STDOUT, "Checking for existing phar build\r\n");
+
+if (file_exists("build/fsc.phar")) {
+    fwrite(STDOUT, "There is already a build file present, attempting to delete it\r\n");
+    if (unlink("build/fsc.phar")) {
+        fwrite(STDOUT, "Previous build deleted\r\n");
+    }
+}
+
 $srcRoot   = __DIR__ . "/src/";
 $buildRoot = __DIR__ . "/build/";
 
