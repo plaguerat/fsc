@@ -65,7 +65,7 @@ $parseString = function ($template) use ($searches) {
     return str_ireplace(
         array_keys($searches),
         array_values($searches),
-        file_get_contents("phar://fsc/templates/" . $template)
+        file_get_contents("phar://fsc.phar/templates/" . $template)
     );
 };
 
