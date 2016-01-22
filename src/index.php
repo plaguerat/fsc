@@ -1,14 +1,7 @@
 <?php
 require_once("phar://fsc.phar/help.php");
 require_once("phar://fsc.phar/helpers/colorize.php");
-// Simple function to colorize output easier
-// colorize = function ($string, $color) {
-//     return sprintf("\033[%sm%s\033[0m", $color, $string);
-// };
-
-$decorate = function ($string, $decor) {
-    return sprintf("\e[%sm%s\e[0m", $decor, $string);
-};
+require_once("phar://fsc.phar/helpers/decorateString.php");
 
 fwrite(STDOUT, "One moment\r\n\r\n");
 sleep(1);
@@ -84,7 +77,17 @@ $files = [
 foreach ($files as $key => $value) {
     $dirPath = sprintf("%s/%s", $storePath, $key);
     if (! is_dir($dirPath)) {
-        fwrite(STDOUT, colorize(sprintf("%s directory not found in %s\r\n\tAttempt to create it (Y/N) (N will skip):", $key, $storePath), 37));
+        fwrite(
+            STDOUT,
+            colorize(
+                sprintf(
+                    "%s directory not found in %s\r\n\tAttempt to create it (Y/N) (N will skip):",
+                    $key,
+                    $storePath
+                ),
+                37
+            )
+        );
         $create = trim(fgets(STDIN));
         if (strcasecmp("Y", $create) === 0) {
             fwrite(STDOUT, colorize("Attempting to create directory\r\n", 32));
